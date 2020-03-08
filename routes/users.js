@@ -1,22 +1,31 @@
+const fs = require('promise-fs');
 const express = require('express');
+
 const router = express.Router();
-const users = require('../data/users.json')
+
 /* GET users listing. */
+const path = require('path');
+
+const usersPath = path.join(__dirname, '../data/users.json');
+
+const getUsers = (path) => fs.readFile(path);
+
+
 router.get('/', (req, res, next) => {
-  res.json(users);
+  getUsers(usersPath).then((data) => res.json(JSON.parse(data)))
+    .catch((err) => console.error(err));
 });
 
+
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
-
-  // eslint-disable-next-line no-underscore-dangle
-  const isFind = users.find(user => user._id === id);
-
-  if (isFind) {
-    return res.json(isFind);
-  }
-
-  return res.status(404).json({ message: 'Нет пользователя с таким id' });
+  const { id } = req.params;
+  getUsers(usersPath)
+    .then((data) => JSON.parse(data))
+    .then((data) => data.find((user) => {
+      if (user._id === id) res.send(res.json(user));
+      else res.json(res.status(404));
+    }))
+    .catch((err) => res.status(404).send({ message: 'id пользователя не найден' }));
 });
 
 

@@ -12,35 +12,25 @@
     "http-errors-express": "^3.1.0",
     "jade": "~1.11.0",
     "path": "^0.12.7",
+    "promise-fs": "^2.1.1",
     "resolve-cwd": "^3.0.0"
   },
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production",
-    "deploy": "NODE_ENV=production gh-pages -d public"
+    "dev": "nodemon ./bin/www"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
     "autoprefixer": "^9.7.4",
     "cookie-parser": "^1.4.4",
     "cross-env": "^7.0.2",
-    "cssnano": "^4.1.10",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
-    "gh-pages": "^2.2.0",
-    "html-loader": "^0.5.5",
-    "image-webpack-loader": "^6.0.0",
     "lodash": "^4.17.15",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
-    "postcss-loader": "^3.0.0",
     "require": "^2.4.20",
     "resolve-url": "^0.2.1",
-    "resolve-url-loader": "^3.1.1",
-    "webpack-md5-hash": "0.0.6"
+    "resolve-url-loader": "^3.1.1"
   }
 }

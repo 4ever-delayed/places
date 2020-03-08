@@ -23,12 +23,6 @@ git checkout develop
 npm install
 ```
 
-3\. Build the app
-
-```
-npm run build
-```
-
 
 **Launch the app**
 
