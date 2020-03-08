@@ -8,6 +8,7 @@
     "core-js": "^3.4.1",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-validator": "^6.4.0",
     "http-errors": "^1.6.3",
     "http-errors-express": "^3.1.0",
     "jade": "~1.11.0",
@@ -17,16 +18,22 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "import": "mongoimport -d places -c=user --file=data/user.json --jsonArray ; mongoimport -d places -c=card --file=data/card.json --jsonArray"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "env-development": "^1.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "lodash": "^4.17.15",
+    "mongo-import": "0.0.2",
+    "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
     "require": "^2.4.20",

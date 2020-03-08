@@ -5,7 +5,7 @@ const router = express.Router();
 
 const path = require('path');
 
-const cardsPath = path.join(__dirname, '../data/cards.json');
+const cardsPath = path.join(__dirname, '../data/card.json');
 const getCards = (cardsPath) => fs.readFile(cardsPath);
 
 const cards = getCards(cardsPath)

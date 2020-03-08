@@ -6,7 +6,7 @@ const router = express.Router();
 /* GET users listing. */
 const path = require('path');
 
-const usersPath = path.join(__dirname, '../data/users.json');
+const usersPath = path.join(__dirname, '../data/user.json');
 
 const getUsers = (path) => fs.readFile(path);
 
