@@ -23,10 +23,10 @@ router.get('/:id', (req, res) => {
     .then((data) => JSON.parse(data))
     .then((data) => data.find((user) => {
       if (user._id === id) res.send(res.json(user));
-      else res.json(res.status(404));
+      else
+        res.json(res.status(404));
     }))
     .catch((err) => res.status(404).send({ message: 'id пользователя не найден' }));
 });
-
 
 module.exports = router;
