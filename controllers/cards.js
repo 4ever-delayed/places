@@ -8,7 +8,6 @@ module.exports.getCards = (req, res) => {
     .catch(err => res.status(500).send({ message: err.message }));
 };
 
-
 module.exports.createCard = (req, res) => {
   const { name, link, likes } = req.body;
   const userId = req.user._id;
