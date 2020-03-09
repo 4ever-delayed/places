@@ -7,13 +7,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
+
 const app = require('../app'); const debug = require('debug')('places:server'); const
   http = require('http');
 
-/*
-  * config
-  * */
-const conf = require('../config.js');
 
 /**
  * Create HTTP server.

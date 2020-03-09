@@ -14,11 +14,10 @@ mongoose.connect('mongodb://localhost:27017/places', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('connected');
+  console.log('connected to database');
 });
 
 const usersRouter = require('./routes/users');
@@ -40,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).json({ message: 'Запрашиваемый ресурс не найден' });
 });
 

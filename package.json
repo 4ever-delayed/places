@@ -1,6 +1,6 @@
 {
   "name": "places",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "gh-pages": "https://oshusha.github.io/places",
   "dependencies": {
     "acorn": "^7.1.1",
@@ -12,6 +12,10 @@
     "http-errors": "^1.6.3",
     "http-errors-express": "^3.1.0",
     "jade": "~1.11.0",
+    "mongo": "^0.1.0",
+    "mongodb-shell": "^1.0.1",
+    "mongoimporter": "^1.0.4",
+    "mongoose": "^5.9.3",
     "path": "^0.12.7",
     "promise-fs": "^2.1.1",
     "resolve-cwd": "^3.0.0"
@@ -19,11 +23,13 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "import": "mongoimport -d places -c=user --file=data/user.json --jsonArray ; mongoimport -d places -c=card --file=data/card.json --jsonArray"
+    "import": "node bin/import"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
     "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "connect-mongodb-session": "^2.3.1",
     "cookie-parser": "^1.4.4",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
@@ -32,8 +38,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "lodash": "^4.17.15",
-    "mongo-import": "0.0.2",
-    "mongoose": "^5.9.3",
+    "mongodb": "^3.5.4",
+    "mongodb-core": "^3.2.7",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
     "require": "^2.4.20",
