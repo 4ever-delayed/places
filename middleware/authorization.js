@@ -1,5 +1,5 @@
 const authorization = (req, res, next) => {
-  req.user = {_id: '5df7b3c969fae7001f721230'};
+  req.user = { _id: '5df7b3c969fae7001f721230' };
   next();
 };
 
