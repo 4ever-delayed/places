@@ -47,21 +47,21 @@ class Api {
 
 
     get(resource) {
-        return this._fetch(`${this._url}${this._groupId}${resource}`)
+        return this._fetch(`${this._url}${resource}`)
     }
 
 
     put(resource,id) {
-        return this._fetch(`${this._url}${this._groupId}${resource}/${id}`, this._methods.put)
+        return this._fetch(`${this._url}${resource}/${id}`, this._methods.put)
     }
 
     delete(resource,id) {
-        return this._fetch(`${this._url}${this._groupId}${resource}/${id}`, this._methods.delete)
+        return this._fetch(`${this._url}${resource}/${id}`, this._methods.delete)
     }
 
 
     update(resource,data) {
-        return this._fetch(`${this._url}${this._groupId}${resource}`, this._methods.patch, data)
+        return this._fetch(`${this._url}${resource}`, this._methods.patch, data)
     }
 
     post(resource,data) {

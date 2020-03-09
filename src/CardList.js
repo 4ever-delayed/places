@@ -15,8 +15,7 @@ class CardList {
     render(){
 
          this._api.get(this._api.resources.cards)
-                    .then(res => res.sort((a,b) => a.likes.length - b.likes.length)
-                        .forEach((data) => {
+                    .then(res => res.forEach((data) => {
                             this.addCard(this._card.create(data))
          }));
     }
