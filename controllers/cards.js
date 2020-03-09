@@ -55,7 +55,6 @@ const like = (req, res) => {
 };
 
 const unlike = (req, res) => {
-
   const cardId = req.params.id;
   // eslint-disable-next-line no-underscore-dangle
   const userId = req.user._id;

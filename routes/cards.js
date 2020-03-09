@@ -8,7 +8,8 @@ router.get('/', cardModule.getCards);
 
 router.post('/', cardModule.createCard);
 
-router.delete(cardModule.deleteCard, '/:id');
+router.delete('/:id', cardModule.deleteCard);
+
 router.delete('/:id/likes', cardModule.unlike);
 
 router.put('/:id/likes', cardModule.like);

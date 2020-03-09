@@ -1,43 +1,50 @@
-'use strict';
-import './index.css'
-import Api from './Api.js'
-import Validation from "./Validation";
-import {errorsText, apiOptions, optionsCardList, optionsPopupImage, optionsPopupCard, optionsPopupAvatar, optionsPopupProfile} from './Options.js';
-import {newForm,profileForm,avatarForm} from './Options'
-export let api = new Api(apiOptions);
 
-//объект для хранения id user'а
-import User from "./User";
-export let user = new User(api);
-
-//init  profile form
-import PopupProfile from "./PopupProfile";
-new PopupProfile(optionsPopupProfile, new Validation(profileForm, { errorsText: errorsText }), api,user)
-    .getProfile()
-    .addEventListeners()
-    .addFormEventListeners();
+import './index.css';
+import Api from './Api.js';
+import Validation from './Validation';
+import {
+  errorsText, apiOptions, optionsCardList, optionsPopupImage, optionsPopupCard, optionsPopupAvatar, optionsPopupProfile,
+, newForm, profileForm, avatarForm } from './Options.js';
 
 
-//init and create avatar form
-import PopupAvatar from "./PopupAvatar";
-new PopupAvatar(optionsPopupAvatar, new Validation(avatarForm, { errorsText: errorsText }), api,user)
-    .getAvatar()
-    .addEventListeners()
-    .addFormEventListeners();
+// объект для хранения id user'а
+import User from './User';
 
-//init card list instance
-import Card from "./Card";
-let card = new Card(api,user);
-import CardList from "./CardList";
-let cardList = new CardList(optionsCardList, card);
+// init  profile form
+import PopupProfile from './PopupProfile';
+
+
+// init and create avatar form
+import PopupAvatar from './PopupAvatar';
+
+// init card list instance
+import Card from './Card';
+import CardList from './CardList';
+
+// init and create Popup
+import PopupImage from './PopupImage';
+
+// init new place add form
+import PopupCard from './PopupCard';
+
+export const api = new Api(apiOptions);
+
+export const user = new User(api);
+new PopupProfile(optionsPopupProfile, new Validation(profileForm, { errorsText }), api, user)
+  .getProfile()
+  .addEventListeners()
+  .addFormEventListeners();
+
+new PopupAvatar(optionsPopupAvatar, new Validation(avatarForm, { errorsText }), api, user)
+  .getAvatar()
+  .addEventListeners()
+  .addFormEventListeners();
+
+const card = new Card(api, user);
+const cardList = new CardList(optionsCardList, card);
 cardList.addEventListeners().render();
-
-//init and create Popup
-import PopupImage from "./PopupImage";
 new PopupImage(optionsPopupImage).addEventListeners();
 
-//init new place add form
-import PopupCard from "./PopupCard";
-new PopupCard(optionsPopupCard, cardList, new Validation(newForm, { errorsText: errorsText }), api,user)
+new PopupCard(optionsPopupCard, cardList, new Validation(newForm, { errorsText }), api, user)
   .addEventListeners()
   .addFormEventListeners();
