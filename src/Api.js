@@ -65,7 +65,7 @@ class Api {
     }
 
     post(resource,data) {
-        return this._fetch(`${this._url}${this._groupId}${resource}`, this._methods.post, data)
+        return this._fetch(`${this._url}${resource}`, this._methods.post, data)
     }
 }
 

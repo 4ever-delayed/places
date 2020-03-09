@@ -22,7 +22,7 @@ const placeContainer = document.querySelector('div.places-list');
 const newForm = document.forms.new;
 const profileForm = document.forms.profile;
 const avatarForm = document.forms.avatar;
-//const url = (isDev) ? 'http://praktikum.tk/' : "https://praktikum.tk/";
+// const url = (isDev) ? 'http://praktikum.tk/' : "https://praktikum.tk/";
 const url = "http://localhost";
 const apiOptions = {
     url:url,
@@ -33,7 +33,7 @@ const apiOptions = {
         avatar: '/users/me/avatar'
     },
     headers:{
-        //authorization:'0c734d8b-79b8-4df9-add9-95f0c2f01c98',
+        authorization:'0c734d8b-79b8-4df9-add9-95f0c2f01c98',
     },
     methods:{
         get: 'GET',
