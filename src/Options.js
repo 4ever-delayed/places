@@ -13,7 +13,7 @@ const errorsText = {
 };
 
 
-
+const PORT = process.env.PORT
 //root element for catch the events
 const root = document.querySelector('.root');
 //card container
@@ -23,6 +23,7 @@ const newForm = document.forms.new;
 const profileForm = document.forms.profile;
 const avatarForm = document.forms.avatar;
 const url = (isDev) ? 'http://praktikum.tk/' : "https://praktikum.tk/";
+//const url = "http://localhost";
 const apiOptions = {
     url:url,
     groupId:'cohort6',
