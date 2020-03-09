@@ -1,45 +1,78 @@
 const User = require('../models/user');
+const { ObjectId } = require('mongodb');
 
-// возвращает всех пользователей
-const usersGet = (req, res) => {
-  User.find({})
-    .then(users => res.send(users))
-    .catch(err => res.status(500).send({ message: 'Произошла ошибка в выводе списка пользователей', error: err }));
+const getUsers = (req, res,next) => {
+   const message = {message :'500, Ошибка в выводе списка пользователей - попробуйте позже'}
+   User.find({},function (data) {
+        return data.json
+   })
+     .then(data => res.send({ data : data}))
+     .catch(err => res.status(500).send({
+       error: message
+     }))
+     next();
 };
 
-// возвращает пользователя по _id
-const userGet = (req, res) => {
-  User.findById(req.params.userId)
-    .then(user => res.send(user))
-    .catch(err => res.status(500).send({ message: 'Произошла ошибка в выводе пользователя', error: err }));
+// get user by id
+const getById = (req, res) => {
+    const message = { message: '500 Произошла ошибка в выводе пользователя'}
+    const id = req.params.id;
+  if (ObjectId.isValid(id)){
+     User.findById({id : id})
+       .then(data => res.send({data: data}))
+      .catch(error => res.status(500).send({
+          error: message
+      }))
+  }
 };
 
-// обновляет профиль
-const userProfilePatch = (req, res) => {
-  const {name, avatar} = req.body;
-  const data = avatar ? {name, avatar} : {name};
-
-  User.findByIdAndUpdate(req.user._id, data, { runValidators: true, new: true })
-    .then(user => res.send(user))
-    .catch(err => res.status(500).send({ message: 'Произошла ошибка в обновлении информации пользователя', error: err }));
+const updateProfile = (req, res , next) => {
+  const userId = req.user._id
+  const message = { message: '500 Произошла ошибка в выводе пользователя'}
+  const { name, about, avatar } = req.body;
+  const options = { runValidators: true, new: true };
+  User.findByIdAndUpdate(
+    userId,
+    { name, about ,avatar},
+    options
+  )
+. then(data => res.send({ data : data}))
+    .catch(error => res.status(500).send({
+      error: message
+    }))
+  next()
 };
 
-// обновляет аватар
-const userProfileAvatarPatch = (req, res) => {
+
+const updateAvatar = (req, res,next) => {
+  const id = req.user._id
   const {avatar} = req.body;
-
-  User.findByIdAndUpdate(req.user._id, {avatar}, { runValidators: true, new: true })
-    .then(user => res.send(user))
-    .catch(err => res.status(500).send({ message: 'Произошла ошибка в обновлении аватарки пользователя', error: err }));
-};
+  const message = {message: '500, ошибка обновления, попроуйте позже'}
+  const options = {runValidators: true, new: true}
+  User.findByIdAndUpdate(id,{avatar},options)
+    .then(data => res.send({data: data}))
+    .catch(error => res.status(500).send({
+      error: message
+    }))
+  next()
+}
 
 // создаёт пользователя
-const userPost = (req, res) => {
+const createUser = (req, res, next) => {
   const {name, about, avatar} = req.body;
+  const message = {message: '500, ошибка создания, попроуйте позже'}
+  User.createUser(req,res)
+    .then(data => res.send({data: data}))
+    .catch(error => res.status(500).send({
+      error: message
+    }))
 
-  User.create({name, about, avatar})
-    .then(user => res.send(user))
-    .catch(err => res.status(500).send({ message: 'Произошла ошибка в создании нового пользователя', error: err }));
+  next()
+}
+module.exports = {
+                 getUsers,
+                  getById,
+                 createUser,
+                  updateProfile,
+                  updateAvatar
 };
-
-module.exports = {usersGet, userGet, userPost, userProfilePatch, userProfileAvatarPatch};
