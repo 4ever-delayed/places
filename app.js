@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+
 const logger = require('morgan');
 
 const mongoose = require('mongoose');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require('body-parser');
 const authorization = require('./middleware/authorization');
 const error = require('./middleware/error');
@@ -26,12 +28,13 @@ const cardsRouter = require('./routes/cards');
 const app = express();
 
 
-app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.json({ type: 'application/*+json' }));
+
 app.use(authorization);
 app.use(error);
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({ type: 'application/*+json' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

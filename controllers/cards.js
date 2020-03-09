@@ -5,8 +5,9 @@ const Card = require('../models/card');
 const getCards = (req, res) => {
   Card.find(req.params)
     .populate('owner')
-    .then((data) => res.send(JSON.stringify(data.send)))
-    .catch((err) => res.status(500).send({ message: err.message }));
+    // eslint-disable-next-line no-shadow
+    .then((req, res) => res.status(404))
+    .then((data) => res.send(data.json));
 };
 
 // eslint-disable-next-line no-unused-vars
