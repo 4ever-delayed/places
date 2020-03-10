@@ -25,8 +25,11 @@ npm install
 
 
 **Launch the app**
-
-1\. Run the development server 
+1\. Import to mongodb users and cards
+```bash
+npm run import
+```
+2\. Run the development server 
 
 In development mode with hot reload:
 ```bash
