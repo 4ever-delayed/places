@@ -1,5 +1,5 @@
 # Places app
-version : 1.0.0
+version : 1.1.0
 ## How to develop the app
 
 **Initialize the environment**
