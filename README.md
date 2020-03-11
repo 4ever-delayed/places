@@ -1,6 +1,6 @@
-# Places app
+# Places server
 version : 1.0.0
-## How to develop the app
+## How to develop the server
 
 **Initialize the environment**
 
@@ -24,7 +24,7 @@ npm install
 ```
 
 
-**Launch the app**
+**Launch the server**
 
 1\. Run the development server 
 
@@ -37,13 +37,13 @@ In production mode:
 npm run start
 ```
 
-2\. Open [localhost:3000](http://localhost:3000) to see the live app.
+2\. Open [localhost:3000](http://localhost:3000) to see the live server.
 
 
 
-`By default, this app runs on port 3000.
-To change the default port the nodejs app instance is listening on, 
-simply export the env variable before start the app:`
+`By default, this server runs on port 3000.
+To change the default port the nodejs server instance is listening on, 
+simply export the env variable before start the server:`
 
 ex:
 ```bash

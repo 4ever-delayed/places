@@ -1,7 +1,8 @@
+require('dotenv').config();
 const fs = require('fs');
 const mongoose = require('mongoose');
 // db connect
-mongoose.connect('mongodb://localhost:27017/places', {
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

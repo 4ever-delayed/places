@@ -1,14 +1,26 @@
-/* GET users listing. */
-// eslint-disable-next-line import/no-extraneous-dependencies
 const express = require('express');
 
 const router = express.Router();
-const userModule = require('../controllers/users');
 
-router.get('/', userModule.getUsers);
-router.get('/:id', userModule.getById);
-router.post('/', userModule.createUser);
-router.patch('/:id', userModule.updateProfile);
-router.patch('/:id/avatar', userModule.updateAvatar);
+// Get all users
+router.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+// Get one user
+router.get('/:id', (req, res) => {
+});
+
+// Create one user
+router.post('/', (req, res) => {
+});
+
+// Update one user
+router.patch('/:id', (req, res) => {
+});
+
+// Delete one user
+router.delete('/:id', (req, res) => {
+});
 
 module.exports = router;

@@ -1,10 +1,12 @@
 
 import './index.css';
-import Api from './Api.js';
+import Api from './Api';
 import Validation from './Validation';
 import {
+  // eslint-disable-next-line max-len
   errorsText, apiOptions, optionsCardList, optionsPopupImage, optionsPopupCard, optionsPopupAvatar, optionsPopupProfile,
-, newForm, profileForm, avatarForm } from './Options.js';
+  newForm, profileForm, avatarForm,
+} from './Options';
 
 
 // объект для хранения id user'а
