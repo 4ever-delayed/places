@@ -1,79 +1,92 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { ObjectId: { isValid } } = require('mongodb');
-const Card = require('../models/card');
+const objectId = require("mongodb").ObjectID;
+const Card = require("../models/card");
 
-const getCards = (req, res) => {
-  Card.find(req.params)
-    .populate('owner')
-    // eslint-disable-next-line no-shadow
-    .then((req, res) => res.status(404))
-    .then((data) => res.send(data.json));
-};
-
-// eslint-disable-next-line no-unused-vars
-const createCard = (req, res) => {
-  const { name, link, likes } = req.body;
-  // eslint-disable-next-line no-underscore-dangle
-  const userId = req.user._id;
-
-  if (isValid(userId)) {
-    Card.create({
-      name, link, owner: userId, likes,
-    })
-      .then((card) => res.status(201).send({ data: card }))
-      .catch((err) => res.status(400).send({ message: err.message }));
+module.exports.get = (req, res) => {
+  id = req.params.id
+  try {
+    if (!id) {
+      Card.find({})
+        .then(cards => res.status(200).send({ data: cards }))
+        .catch(err => res.status(500).send({ message: err.message }));
+    } else {
+      Card.findById(id)
+        .then((err, cards) => {
+          if (err) {
+            res.status(404).send({ message: err.message });
+          }
+          res.status(200).send({ data: cards });
+        })
+        .catch(err => res.status(500).send({ message: err.message }));
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
   }
 };
-const deleteCard = (req, res) => {
-  if (isValid(req.params.id)) {
+module.exports.post = (req, res) => {
+  const name = req.body.name;
+  const link = req.body.link;
+  const likes = req.body.likes;
+  const userId = req.user._id;
+
+  try {
+    Card.create({ name, link, owner: userId, likes })
+      .then(card => res.status(201).send({ data: card }))
+      .catch(err => res.status(400).send({ message: err.message }));
+  } catch (err) {
+    res.status(400).send({ mesage: err.message });
+  }
+};
+module.exports.delete = (req, res) => {
+  try {
     Card.findByIdAndDelete(req.params.id)
-      .orFail(() => new Error('нет карточки с таким id'))
-      .then((card) => {
-        res.send({ data: card });
+      .then(card => {
+        res.status(200).send({ data: card });
       })
-      .catch((err) => res.status(404).send({ message: err.message }));
-  } else {
-    res.status(400).send({ message: 'id карточки не соответсвует стандарту' });
+      .catch(err => res.status(404).send({ message: err.message }));
+  } catch (err) {
+    res.status(400).send({ message: err.message });
   }
 };
 
-const like = (req, res) => {
+module.exports.like = (req, res) => {
   const cardId = req.params.id;
-  // eslint-disable-next-line no-underscore-dangle
   const userId = req.user._id;
 
-  if (isValid(cardId)) {
+  try {
     Card.findByIdAndUpdate(
       cardId,
       {
-        $addToSet: { likes: userId },
+        $addToSet: { likes: userId }
       },
-      { new: true },
+      { new: true }
     )
-      .then((card) => res.send({ data: card }))
-      .catch((err) => res.status(404).send({ message: err.message }));
+      .then(card => res.status(200).send({ data: card }))
+      .catch(err => res.status(404).send({ message: err.message }));
+  } catch (err) {
+    res.status(400).send({ message: err.message });
   }
 };
 
-const unlike = (req, res) => {
+module.exports.unlike = (req, res) => {
   const cardId = req.params.id;
-  // eslint-disable-next-line no-underscore-dangle
   const userId = req.user._id;
 
-  if (isValid(cardId)) {
+  try {
     Card.findByIdAndUpdate(
       cardId,
       {
-        $pull: { likes: userId },
+        $pull: { likes: userId }
       },
-      { new: true },
+      { new: true }
     )
-      .then((card) => {
-        res.send({ data: card });
+      .then((error, res) => {
+        res.status(401).send({ data: error });
       })
-      .catch((err) => res.status(404).send({ message: err.message }));
+      .then(card => {
+        res.status(200).send({ data: card });
+      })
+      .catch(err => res.status(404).send({ message: err.message }));
+  } catch (err) {
+    res.status(400).send({ message: err.message });
   }
-};
-module.exports = {
-  unlike, like, deleteCard, createCard, getCards,
 };

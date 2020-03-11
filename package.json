@@ -23,6 +23,7 @@
     "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
+    "prettier": "^1.19.1",
     "promise-fs": "^2.1.1",
     "resolve-cwd": "^3.0.0",
     "validator": "^12.2.0"
