@@ -4,15 +4,16 @@ const express = require("express");
 const server = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const router = require("./routes/routes");
+const router = require("./routes/router");
 
 const authorization = require("./middleware/authorization");
 const error = require("./middleware/error");
 
-server.use(bodyParser.json());
+
 server.use(authorization);
 server.use(error);
 server.use(router);
+server.use(bodyParser.json());
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,

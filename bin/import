@@ -18,9 +18,9 @@ db.once('open', () => {
 });
 
 const userData = fs.readFileSync('./data/user.json');
-const users = JSON.parse(userData);
-User.insertMany(users);
-console.log(`Было импортировано ${users.length} записей`);
+const users.js = JSON.parse(userData);
+User.insertMany(users.js);
+console.log(`Было импортировано ${users.js.length} записей`);
 
 const cardData = fs.readFileSync('./data/card.json');
 const cards = JSON.parse(cardData);

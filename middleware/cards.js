@@ -1,21 +1,21 @@
-const User = require("../models/user");
+const Card = require("../models/card");
 const objectId = require("mongodb").ObjectID;
 
-async function getUsers(req, res, next) {
+async function getCards(req, res, next) {
   if (objectId.isValid(req.params.id)) {
-    const user = await User.findById(req.params.id);
+    const card = await Card.findById(req.params.id);
     try {
-      if (user == null) {
+      if (card == null) {
         await res.status(404).json({ message: "Not Found" });
       }
     } catch (err) {
       await res.status(500).json({ message: err.message });
     }
 
-    res.user = user;
+    res.card = card;
   } else {
-    res.status(404).json({ message: "Invalid user id" });
+    res.status(404).json({ message: "Invalid card id" });
   }
   next();
 }
-module.exports = { getUsers };
+module.exports = { getCards };

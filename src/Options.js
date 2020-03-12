@@ -28,8 +28,8 @@ const apiOptions = {
   resources: {
     cards: '/cards',
     likes: '/cards/like',
-    user: '/users/me',
-    avatar: '/users/me/avatar',
+    user: '/users.js/me',
+    avatar: '/users.js/me/avatar',
   },
   headers: {
     authorization: '0c734d8b-79b8-4df9-add9-95f0c2f01c98',

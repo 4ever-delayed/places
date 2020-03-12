@@ -1,17 +1,28 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const express = require('express');
-
 const router = express.Router();
-const cardModule = require('../controllers/cards');
+const cards = require("../controllers/cards");
+const { getCards } = require("../middleware/cards");
 
-router.get('/', cardModule.getCards);
+// Get all users.js
+router.get("/", cards.get);
+// Create card
+router.post("/",getCards, cards.post);
+// Get one user
+router.get("/:id", getCards, (req, res) => {
+  res.json(res.card);
+});
 
-router.post('/', cardModule.createCard);
+// Delete one card
 
-router.delete('/:id', cardModule.deleteCard);
+router.delete("/:id", getCards, cards.delete);
 
-router.delete('/:id/likes', cardModule.unlike);
+// Like Card
 
-router.put('/:id/likes', cardModule.like);
+router.patch("/:id/likes/", getCards, cards.like);
+
+// unlike card
+
+router.delete("/:id/likes/", getCards, cards.unlike);
 
 module.exports = router;
