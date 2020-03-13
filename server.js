@@ -4,7 +4,7 @@ const express = require("express");
 const server = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const router = require("./routes/routes");
+const router = require("./router/main");
 
 const authorization = require("./middleware/authorization");
 const error = require("./middleware/error");

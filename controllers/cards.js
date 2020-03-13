@@ -3,8 +3,8 @@ const Card = require("../models/card");
 
 module.exports.get = async (req, res) => {
   try {
-    const cards = await Card.find();
-    await res.json(cards);
+    const cards = await Card.find().populate("owner");
+    await res.json({data : cards});
   } catch (err) {
     await res.status(500).json({ message: err.message });
   }
@@ -20,7 +20,7 @@ module.exports.post = async (req, res) => {
 
   try {
     const newCard = await card.save();
-    await res.status(201).json(newCard);
+    await res.status(201).json({data: newCard});
   } catch (err) {
     await res.status(400).json({ message: err.message });
   }
@@ -40,7 +40,7 @@ module.exports.like = async (req, res) => {
   await res.card.likes.addToSet(userId);
   try {
     const updatedCard = await res.card.save();
-    res.json(updatedCard);
+    res.json({data: updatedCard});
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -51,7 +51,7 @@ module.exports.unlike = async (req, res) => {
   await res.card.likes.pull(userId);
   try {
     const updatedCard = await res.card.save();
-    res.json(updatedCard);
+    res.json({data: updatedCard});
   } catch {
     res.status(400).json({ message: err.message });
   }

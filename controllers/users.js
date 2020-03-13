@@ -1,64 +1,58 @@
-
-// import user model
 const User = require("../models/user");
 
-// import custom utilities
-
-
-// возвращает пользователя по _id
-const userGet = (req, res) => {
-  User.findById(req.params.userId)
-    .then(user => res.send(user))
-    .catch(err =>
-      res
-        .status(500)
-        .send({ message: "Произошла ошибка в выводе пользователя", error: err })
-    );
+module.exports.get = async (req, res) => {
+  try {
+    const users = await User.find()
+    await res.json({data: users});
+  } catch (err) {
+    await res.status(500).json({ message: err.message });
+  }
 };
 
-// обновляет профиль
-const userProfilePatch = (req, res) => {
-  const { name, avatar } = req.body;
-  const data = avatar ? { name, avatar } : { name };
+module.exports.post = async (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    about: req.body.about,
+    avatar: req.body.avatar,
+  });
 
-  User.findByIdAndUpdate(req.user._id, data, { runValidators: true, new: true })
-    .then(user => res.send(user))
-    .catch(err =>
-      res.status(500).send({
-        message: "Произошла ошибка в обновлении информации пользователя",
-        error: err
-      })
-    );
+  try {
+    const newUser = await user.save();
+    await res.status(201).json({data: newUser});
+  } catch (err) {
+    await res.status(400).json({ message: err.message });
+  }
 };
 
-// обновляет аватар
-const userProfileAvatarPatch = (req, res) => {
-  const { avatar } = req.body;
-
-  User.findByIdAndUpdate(
-    req.user._id,
-    { avatar },
-    { runValidators: true, new: true }
-  )
-    .then(user => res.send(user))
-    .catch(err =>
-      res.status(500).send({
-        message: "Произошла ошибка в обновлении аватарки пользователя",
-        error: err
-      })
-    );
+module.exports.delete = async (req, res) => {
+  try {
+    await res.user.delete();
+    res.json({ message: "Successfully deleted" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
-// создаёт пользователя
-const userPost = (req, res) => {
-  const { name, about, avatar } = req.body;
+module.exports.update = async (req, res) => {
+  if(req.body.name != null){
+    res.user.name = req.body.name;
+  }
+  if(req.body.avatar != null && req.originalUrl.split("/").slice(-1).join("") === "avatar"){
+    res.user.avatar = req.body.avatar;
+  }
+  if(req.body.about != null){
+    res.user.about = req.body.about;
+  }
 
-  User.create({ name, about, avatar })
-    .then(user => res.send(user))
-    .catch(err =>
-      res.status(500).send({
-        message: "Произошла ошибка в создании нового пользователя",
-        error: err
-      })
-    );
+  try {
+    const updatedUser = await res.user.save({
+      new: true,
+      runValidators: true
+    });
+    res.json({data: updatedUser});
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
+
+
