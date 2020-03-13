@@ -52,7 +52,8 @@ module.exports.unlike = async (req, res) => {
   try {
     const updatedCard = await res.card.save();
     res.json({data: updatedCard});
-  } catch {
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+  } catch(err) {
     res.status(400).json({ message: err.message });
   }
 };
