@@ -25,4 +25,4 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("connected to db");
 });
-server.listen(3000, () => console.log("server started"));
+server.listen(process.env.PORT, () => console.log("server started"));
