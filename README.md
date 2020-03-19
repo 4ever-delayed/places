@@ -7,7 +7,7 @@ version : 1.0.0
 1\. Clone the repository:
 
 ```bash
-git clone https://github.com/oshusha/places.git
+git clone https://github.com/oshusha/places-backend.git
 cd places
 ```
 
