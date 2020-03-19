@@ -8,7 +8,7 @@ version : 1.0.0
 
 ```bash
 git clone https://github.com/oshusha/places-backend.git
-cd places
+cd places-backend
 ```
 
 
