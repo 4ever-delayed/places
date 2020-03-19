@@ -16,6 +16,7 @@
     "http-errors": "^1.6.3",
     "http-errors-express": "^3.1.0",
     "jade": "~1.11.0",
+    "minimist": "^1.2.2",
     "mongo": "^0.1.0",
     "mongodb": "^3.5.4",
     "mongodb-shell": "^1.0.1",
