@@ -1,5 +1,5 @@
-const User = require("../models/user");
 const objectId = require("mongodb").ObjectID;
+const User = require("../models/user");
 
 async function getUser(req, res, next) {
   if (objectId.isValid(req.params.id)) {

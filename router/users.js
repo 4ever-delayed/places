@@ -5,7 +5,7 @@ const router = express.Router();
 const users = require("../controllers/users");
 const { getUser } = require("../middleware/users")
 
-//Get All Users
+// Get All Users
 router.get("/", users.get);
 
 // Get one card

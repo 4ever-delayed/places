@@ -1,5 +1,5 @@
-const Card = require("../models/card");
 const objectId = require("mongodb").ObjectID;
+const Card = require("../models/card");
 
 async function getCard(req, res, next) {
   if (objectId.isValid(req.params.id)) {

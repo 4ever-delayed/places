@@ -22,7 +22,7 @@ router.delete("/:id", getCard, cards.delete);
 
 router.patch("/:id/likes", getCard, cards.like);
 
-//Unlike Card
+// Unlike Card
 
 router.delete("/:id/likes", getCard, cards.unlike);
 
