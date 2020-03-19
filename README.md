@@ -42,6 +42,7 @@ simply use the .env file:`
 
 ex:
 DATABASE_URL=mongodb://127.0.0.1:27017/places
+
 PORT=3000
 
 [DEMO](https://oshusha.github.io/places/)
@@ -50,17 +51,27 @@ PORT=3000
 API methods:
 
 GET /cards — get all cards
+
 GET /cards/:cardId - get card by id
+
 POST /cards — create cards
+
 DELETE /cards/:cardId — delete card by id
+
 PATCH /cards/:cardId/likes- like the card
+
 DELETE /cards/:cardId/likes -remove like
 
 GET /users - get all users
+
 GET /users/:userId - get user by id
+
 POST /users - create user
+
 DELETE /users/:userId - delete user by id
+
 PATCH /users/:userId - update user info
+
 PATCH /users/:userId/avatar - update avatar
 
 
