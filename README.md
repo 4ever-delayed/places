@@ -11,11 +11,6 @@ git clone https://github.com/oshusha/places.git
 cd places
 ```
 
-2\. Checkout to the develop branch:
-
-```bash
-git checkout develop
-```
 
 2\. Install the dependencies:
 
@@ -43,15 +38,31 @@ npm run start
 
 `By default, this server runs on port 3000.
 To change the default port the nodejs server instance is listening on, 
-simply export the env variable before start the server:`
+simply use the .env file:`
 
 ex:
-```bash
-export PORT=3333
-npm run start
-```
+DATABASE_URL=mongodb://127.0.0.1:27017/places
+PORT=3000
 
 [DEMO](https://oshusha.github.io/places/)
+
+
+API methods:
+
+GET /cards — get all cards
+GET /cards/:cardId - get card by id
+POST /cards — create cards
+DELETE /cards/:cardId — delete card by id
+PATCH /cards/:cardId/likes- like the card
+DELETE /cards/:cardId/likes -remove like
+
+GET /users - get all users
+GET /users/:userId - get user by id
+POST /users - create user
+DELETE /users/:userId - delete user by id
+PATCH /users/:userId - update user info
+PATCH /users/:userId/avatar - update avatar
+
 
 
 
